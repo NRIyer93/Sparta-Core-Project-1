@@ -1,0 +1,61 @@
+body {
+	background-color: lightblue;
+	color: red;
+	text-align: center;
+}
+
+h1 {
+
+	color: black;
+}
+
+table {
+  margin: 0 auto;
+  border-radius:10px;
+}
+td {
+  border: 1px solid gray;
+  width: 100px;
+  height: 100px;
+  text-align: center;
+  font-size: 8em;
+  box-sizing:border-box;
+  background-color: black;
+}
+
+td:hover{
+  cursor:pointer;
+}
+
+td:first-child{
+  border-left: none;
+}
+td:last-child{
+  border-right: none;
+}
+
+td:nth-child(2n+2){
+  border-right: none;
+  border-left: none;
+}
+
+thead tr td{
+  border-top:none;
+  border-bottom: none;
+}
+
+tfoot tr td{
+  border-top:none;
+  border-bottom: none;
+}
+
+.gameContainer {
+	border-color: black;
+	text-align: center;
+}
+
+.scoreContainer {
+	text-align: center;
+}
+
+
