@@ -29,7 +29,8 @@ var scoreCount = 0;
 var turnCount = 0;
 // Variable to show scoreboard to include player 1 and player 2 scores
 var scoreBoard = [[null],[null]];
-
+// Var to show timer
+var gameTimer = 60 * 1000;
 //------------------------------------------------------------------------// 
 
 /////////////////////////
@@ -43,9 +44,30 @@ var scoreBoard = [[null],[null]];
 // clicked.
 function changeCol(){
 	// The hole that is clicked
-	var $hole = $(this);
-	$hole.html().
+	//var $hole = $(this);
+	// where 'i' is the active square.
+	var randSquare = Math.floor(Math.random() * 11);
+	for (i = 0; i < $holes.length; i++){
+		
+		if(i === randSquare){
+			$($holes[i]).css('background-color', 'red');
+			
+			$($holes[i]).click(function() {
+
+				$(this).css('background-color', 'black');
+				console.log('this works');
+				scoreCount++;
+				console.log(scoreCount);
+				$(".player1").html("Player 1: " + scoreCount);
+			})
+		}
+	}
+
+
+
 }
+
+changeCol();
 //-------------------------------------------------//
 
 // Initiate event listeners for the boxes
@@ -63,6 +85,8 @@ function showMoles(){
 // Function to hide 'moles'
 function hideMoles(){
 
+	var $hole = $(this);
+
 }
 
 //-------------------------------------------------//
@@ -72,6 +96,7 @@ function playerSwitch(){
 
 	// if timer is zero, increment turn count and 
 	// play again.
+	turnCount++;
 }
 //-------------------------------------------------//
 
@@ -92,9 +117,15 @@ function scoreCompare(){
 
 //-------------------------------------------------//
 
+// After 1 minute, the playerSwitch function is executed,
+// ending player 1's game and moving to player 2.
+//setTimeout(playerSwitch, 60000);
+
+//--------------------------------------------------//
+
 // Function to run game
 function runGame(){
-
+	window.setTimeout(playerSwitch, 60000);
 }
 //-------------------------------------------------//
 
