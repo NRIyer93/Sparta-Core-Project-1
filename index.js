@@ -10,11 +10,9 @@ $(function(event){
 //-----------------------------------------------------------------------//
 
 ////////////////////////////
-//		Variables		 //
+//		Variables		 				//
 ///////////////////////////
 
-// Variable to store name of player
-// var name = prompt("WELCOME TO WHACK-A-MOLE! Please enter your name: ");
 // Variable to find the display boxes
 var $holes = $("td");
 // Variable to keep track of Player 1 score
@@ -29,73 +27,66 @@ var scoreCount = 0;
 var turnCount = 0;
 // Variable to show scoreboard to include player 1 and player 2 scores
 var scoreBoard = [[null],[null]];
-// Var to show timer
-var gameTimer = 60 * 1000;
 // Var to set mole intervals
 var moleInterval;
+// Variable for timer
+var time = 20;
+// Variable for timer interval
+var interval;
 //------------------------------------------------------------------------// 
 
 /////////////////////////
 //	   FUNCTIONS	  //
 ////////////////////////
 
-// Function to change box colour on click
-
 // First, we need to create a function that changes the colour of the
 // background. Call it in a random generator and then change back when 
 // clicked.
+
+// Function to change box colour on click
 function changeCol(){
-	// The hole that is clicked
-	//var $hole = $(this);
 	// where 'i' is the active square.
 	var randSquare = Math.floor(Math.random() * 11);
-	//do{
 		for (i = 0; i < $holes.length; i++){
-			if(scoreCount < 20){
+			
+			if(time > 0){
 				if(i === randSquare){
 					$($holes[i]).css('background-color', 'red');
 					
 					$($holes[i]).click(function() {
-
 						$(this).css('background-color', 'black');
 						console.log('this works');
 						scoreCount++;
 						console.log(scoreCount);
-						$(".player1").html("Player 1: " + scoreCount);
+						if(turnCount === 0){
+							$(".player1").html("Player 1: " + scoreCount);
+						}else {
+							$(".player1").html("Player 1: " + scoreCount);
+						}
 						// prevents user from clicking on same panel to score again
 						$(this).off('click');
 					})
 				}
 			}
-			
 		} 
-	//}
-	//while(scoreCount < 20);
-
-}
-
-//changeCol();
-//-------------------------------------------------//
-
-// Initiate event listeners for the boxes
-function addListeners(){
-
 }
 //-------------------------------------------------//
 
-// Function to show 'moles'
-function showMoles(){
-
+// Function to show time
+function countDown(){
+	time--;
+	$('.timer').html("Time left: " + time + 's');
+	if(time === 0){
+		$('.timer').html("GAME OVER");
+		window.clearInterval(interval);
+		turnCount++;
+		console.log("player switch")
+	}
 }
-//-------------------------------------------------//
 
-// Function to hide 'moles'
-function hideMoles(){
-
-	
-
+function startTimer(){
+	interval = setInterval(countDown, 1000);
 }
-//-------------------------------------------------//
 
 //-------------------------------------------------//
 
@@ -105,6 +96,7 @@ function playerSwitch(){
 	// if timer is zero, increment turn count and 
 	// play again.
 	turnCount++;
+	changeCol();
 }
 //-------------------------------------------------//
 
@@ -118,50 +110,49 @@ function scoreCompare(){
 		console.log("Draw!!!!")
 	}
 }
-//-------------------------------------------------//
-
-// Function to randomly assign the square
-
-
-//-------------------------------------------------//
-
-// After 1 minute, the playerSwitch function is executed,
-// ending player 1's game and moving to player 2.
-//setTimeout(playerSwitch, 60000);
 
 //--------------------------------------------------//
 function intervalChange(){
-	if(scoreCount <= 4){
-		moleInterval = setInterval(changeCol, 3000);
-	}
-	if (scoreCount >= 5 && scoreCount <= 10){
+	if(scoreCount <= 3){
 		moleInterval = setInterval(changeCol, 1000);
 	}
-	if(scoreCount >= 11 && scoreCount <= 20 ){
+	if (scoreCount >= 4 && scoreCount <= 10){
 		moleInterval = setInterval(changeCol, 250);
 	}
+	if(scoreCount >= 11 && scoreCount <= 14 ){
+		moleInterval = setInterval(changeCol, 100);
+	}
+	if(scoreCount >= 14 && scoreCount <= 20 ){
+		moleInterval = setInterval(changeCol, 50);
+	}
+	if(scoreCount > 20){
+		moleInterval = setInterval(changeCol, 25);
+	}
 }
+
 //--------------------------------------------------//
 
 // Function to run game
 function runGame(){
-	// moleInterval = setInterval(changeCol, 3000);
+	
+	startTimer();
 	intervalChange();
 	changeCol();
-	window.setTimeout(playerSwitch, 60000);
-	
-
+	//playerSwitch(); ///
+	//endGame();	 		 /////////// Lines 141 to 143 to be used later
+	//scoreCompare(); ///
 }
+
 //-------------------------------------------------//
 
 // Function to end game
 function endGame(){
-	// when turn count is equal to 2
-	// display "game over" screen and end
+	if (turnCount === 2) {
+		console.log("end of game");
+	}
 
 }
 //--------------------------------------------------//
-
 runGame();
 
 })
