@@ -15,14 +15,9 @@ $(function(event){
 
 // Variable to find the display boxes
 var $holes = $("td");
-// Variable to keep track of Player 1 score
-var player1score = 0;
-// Variable to keep track of Player 2 score
-var player2score = 0;
-// Variable with score to beat
-var highScore = [];
-// Counter to increment score
+// Counter to increment score for player 1 and 2
 var scoreCount = 0;
+var scoreCount2 = 0;
 // Counter to switch turns
 var turnCount = 0;
 // Variable to show scoreboard to include player 1 and player 2 scores
@@ -33,6 +28,8 @@ var moleInterval;
 var time = 20;
 // Variable for timer interval
 var interval;
+// Variable for mole interval
+var showInterval;
 //------------------------------------------------------------------------// 
 
 /////////////////////////
@@ -44,107 +41,140 @@ var interval;
 // clicked.
 
 // Function to change box colour on click
-function changeCol(){
-	// where 'i' is the active square.
+
+//-------------------------------------------------//
+function showMole(){
 	var randSquare = Math.floor(Math.random() * 11);
-		for (i = 0; i < $holes.length; i++){
-			
-			if(time > 0){
-				if(i === randSquare){
-					$($holes[i]).css('background-color', 'red');
-					
-					$($holes[i]).click(function() {
+	for(i = 0; i < $holes.length - 1; i++){
+		if (time > 0){
+			if(i === randSquare){
+				// console.log('here', i, randSquare);
+				var index = i;
+				console.log('------------------------', index);
+				$($holes[i]).css('background-color','blue');
+				setTimeout(function(){
+					console.log('Index', i, 'here');
+					$($holes[index]).css('background-color','black');
+					$($holes[i]).off();
+				}, 1000);
+				
+				$($holes[i]).click(function() {
 						$(this).css('background-color', 'black');
 						console.log('this works');
-						scoreCount++;
-						console.log(scoreCount);
 						if(turnCount === 0){
+							scoreCount++;
 							$(".player1").html("Player 1: " + scoreCount);
-						}else {
-							$(".player1").html("Player 1: " + scoreCount);
+						}else{
+							scoreCount2++;
+							$(".player2").html("Player 2: " + scoreCount2);
 						}
-						// prevents user from clicking on same panel to score again
 						$(this).off('click');
-					})
-				}
+				})
 			}
-		} 
+		}
+	}
 }
 //-------------------------------------------------//
 
-// Function to show time
+function hideMole(){
+					console.log("timeout");
+	$($holes[i]).css('background-color','black');
+}
+
+//--------------------------------------------------//
+function moleTimer() {
+		
+		showInterval = setInterval(showMole, 2000);
+
+	}
+
+//---------------------------------------------------------//
+// Timing functions
 function countDown(){
 	time--;
 	$('.timer').html("Time left: " + time + 's');
 	if(time === 0){
 		$('.timer').html("GAME OVER");
 		window.clearInterval(interval);
+		$holes.off();
+		hideMole();
+		$holes = [];
 		turnCount++;
-		console.log("player switch")
+		console.log(turnCount);
+		time = 20;
+		console.log("player 2 turn")
+		// clearInterval(moleInterval);
 	}
 }
 
 function startTimer(){
 	interval = setInterval(countDown, 1000);
 }
-
 //-------------------------------------------------//
 
-// Function to switch players
-function playerSwitch(){
-
-	// if timer is zero, increment turn count and 
-	// play again.
-	turnCount++;
-	changeCol();
-}
 //-------------------------------------------------//
 
 // Function to compare player 1 and player 2 score
 function scoreCompare(){
-	if (player1score > player2score){
-		console.log("Player 1 has won!!");
-	}else if (player1score < player2score){
-		console.log("Player 2 has won!!");
-	}else {
-		console.log("Draw!!!!")
+	if (turnCount === 2){
+		if (scoreCount > scoreCount2){
+			console.log("Player 1 has won!!");
+		}else if (scoreCount < scoreCount2){
+			console.log("Player 2 has won!!");
+		}else {
+			console.log("Draw!!!!")
+		}
 	}
 }
 
 //--------------------------------------------------//
-function intervalChange(){
-	if(scoreCount <= 3){
-		moleInterval = setInterval(changeCol, 1000);
-	}
-	if (scoreCount >= 4 && scoreCount <= 10){
-		moleInterval = setInterval(changeCol, 250);
-	}
-	if(scoreCount >= 11 && scoreCount <= 14 ){
-		moleInterval = setInterval(changeCol, 100);
-	}
-	if(scoreCount >= 14 && scoreCount <= 20 ){
-		moleInterval = setInterval(changeCol, 50);
-	}
-	if(scoreCount > 20){
-		moleInterval = setInterval(changeCol, 25);
-	}
-}
+// function intervalChange(//scoreCounter,moleInt
+// 	){
+// 	// var playerSpeed = scoreCounter;
+// 	// var moleInter = moleInt;
+// 	if(turnCount === 0){
+// 		if(scoreCount <= 3){
+// 			console.log("< 3");
+// 			moleInterval= setInterval(showMole, 3000);
+// 		}// }else if (scoreCount >= 4 && scoreCount <= 10){
+		// 	console.log("< 10");
+		// 	clearInterval(moleInterval);
+		// 	moleInterval = setInterval(changeCol, 2000);
+		// }else if(scoreCount >= 11 && scoreCount <= 14 ){
+		// 	console.log("< 14");
+		// 	clearInterval(moleInterval);
+		// 	moleInterval = setInterval(changeCol, 1000);
+		// }else if(scoreCount >= 14 && scoreCount <= 20 ){
+		// 	clearInterval(moleInterval);
+		// 	moleInterval = setInterval(changeCol, 900);
+		// }else{
+		// 	clearInterval(moleInterval);
+		// 	moleInterval = setInterval(changeCol, 800);
+		// }
+// 	}
+// }
 
 //--------------------------------------------------//
 
-// Function to run game
-function runGame(){
-	
+// Function to run first game
+function runGame1(){
 	startTimer();
-	intervalChange();
-	changeCol();
-	//playerSwitch(); ///
-	//endGame();	 		 /////////// Lines 141 to 143 to be used later
-	//scoreCompare(); ///
+	//intervalChange();
+	moleTimer();
+	showMole();
 }
 
 //-------------------------------------------------//
 
+// Function to run second game
+ function runGame2(){
+ 	startTimer();
+ 	// intervalChange();
+ 	moleTimer();
+ 	showMole();
+
+ }
+//-------------------------------------------------//
 // Function to end game
 function endGame(){
 	if (turnCount === 2) {
@@ -153,9 +183,21 @@ function endGame(){
 
 }
 //--------------------------------------------------//
-runGame();
+$('.start').on('click', function(){
+        runGame1();
+    });
+// runGame();
+$('.start2').on('click', function(){
+				 $holes = $("td");
+				 time = 20;
+        runGame2();
+    });
+scoreCompare();
+console.log(scoreCompare);
 
-})
+});
+
+
 
 
 

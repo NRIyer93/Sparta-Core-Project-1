@@ -1,11 +1,13 @@
 body {
 	background-color: lightblue;
-	color: red;
+	color: white;
 	text-align: center;
+	background-image: url("https://s-media-cache-ak0.pinimg.com/originals/3a/ca/2f/3aca2f212314581bada96d710f142284.jpg");
+	
 }
 
-h1 {
-
+head {
+	text-align: center;
 	color: black;
 }
 
@@ -20,7 +22,7 @@ td {
   text-align: center;
   font-size: 8em;
   box-sizing:border-box;
-  background-color: black;
+  background-color: black; 
 }
 
 td:hover{
@@ -52,10 +54,21 @@ tfoot tr td{
 .gameContainer {
 	border-color: black;
 	text-align: center;
+	 
+}
+
+.displayContainer {
+	text-align: center;
 }
 
 .scoreContainer {
 	text-align: center;
+	border: 2px solid black;
+	background-color: grey;
 }
 
+.jumbotron {
+	text-align: center;
+	border-width: 100%;
+}
 
