@@ -41,6 +41,8 @@ var showInterval;
 // clicked.
 
 // Function to change box colour on click
+//--------------------------------------------------//
+
 
 //-------------------------------------------------//
 function showMole(){

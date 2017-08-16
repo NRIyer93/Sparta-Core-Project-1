@@ -3,7 +3,7 @@ body {
 	color: white;
 	text-align: center;
 	background-image: url("https://s-media-cache-ak0.pinimg.com/originals/3a/ca/2f/3aca2f212314581bada96d710f142284.jpg");
-	
+	cursor: url("projectImg/baseball-bat.png");
 }
 
 head {
@@ -50,6 +50,17 @@ tfoot tr td{
   border-top:none;
   border-bottom: none;
 }
+
+	cursor: url("projectImg/baseball-bat.png");
+/*figure#mouse-pointer {
+	background-image: url("projectImg/baseball-bat.png");
+	width: 44px;
+    height: 44px;
+    position: absolute;
+    margin-left: -8px; 
+    display: block;
+
+}*/
 
 .gameContainer {
 	border-color: black;
