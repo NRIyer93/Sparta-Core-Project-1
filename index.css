@@ -2,8 +2,12 @@ body {
 	background-color: lightblue;
 	color: white;
 	text-align: center;
-	background-image: url("https://s-media-cache-ak0.pinimg.com/originals/3a/ca/2f/3aca2f212314581bada96d710f142284.jpg");
-	cursor: url("projectImg/baseball-bat.png");
+	/*background-image: url("https://s-media-cache-ak0.pinimg.com/originals/3a/ca/2f/3aca2f212314581bada96d710f142284.jpg");*/
+	/*background-image: url("projectImg/circusLandscape.png");
+*/	/*cursor: url("projectImg/baseball-bat.png");*/
+	/*background-image: url("projectImg/circusStripe.jpg");*/
+	margin: 0;
+	padding: 0;
 }
 
 head {
@@ -51,25 +55,36 @@ tfoot tr td{
   border-bottom: none;
 }
 
+	/*cursor: url("projectImg/baseball-bat.png");*/
+#mouse-pointer {
 	cursor: url("projectImg/baseball-bat.png");
-/*figure#mouse-pointer {
-	background-image: url("projectImg/baseball-bat.png");
-	width: 44px;
-    height: 44px;
-    position: absolute;
-    margin-left: -8px; 
-    display: block;
 
-}*/
+}
+
+.backG {
+
+	background-image: url("projectImg/circusStripe.jpg");
+	background-repeat: no-repeat;
+	background-size: 100vw 100vh;
+}
+
 
 .gameContainer {
 	border-color: black;
 	text-align: center;
+	border-height: 100vh;
+	border-width: 100vw;
+	
 	 
 }
 
 .displayContainer {
+	padding: auto;
+	margin: auto;
 	text-align: center;
+	border-height: 100vh;
+	border-width: 100vw;
+	
 }
 
 .scoreContainer {
@@ -78,8 +93,18 @@ tfoot tr td{
 	background-color: grey;
 }
 
+
+
 .jumbotron {
 	text-align: center;
-	border-width: 100%;
+	border-width: 50vw;
 }
+/*@keyframes animate {
+	from{
+		background-position: 0 0;
+	}
+	to {
+		background-position: 100% 0;
+	}
+}*/
 
