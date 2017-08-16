@@ -5,49 +5,69 @@
 	<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"> integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous">
 	</script>
 	<link rel="stylesheet" type="text/css" href="index.css">
+	<link rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap.min.css">
 	<script src="index.js"></script>
 	
 </head>
-	<h1>SPARTA CORE PROJECT 1</h1>
+	<h1>WHACK A MOLE</h1>
 <body>
-	<div class="gameContainer">
-			<div class="displayContainer">
-				<h1>WHACK-A-MOLE!</h1>
-				<table>
-					<thead>
-						<tr>
-							<td data-num="0"></td>
-						    <td data-num="1"></td>
-						    <td data-num="2"></td>
-						    <td data-num="3"></td>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-						    <td data-num="4"></td>
-						    <td data-num="5"></td>
-						    <td data-num="6"></td>
-						    <td data-num="7"></td>
-						</tr>
-					</tbody>
-					<tfoot>
-						<tr>
-						    <td data-num="8"></td>
-						    <td data-num="9"></td>
-						    <td data-num="10"></td>
-						    <td data-num="11"></td>
-						</tr>
-					</tfoot>
-				</table>
+	<figure id="mouse-pointer"></figure>
+	<div class="backG">
+			<div class="gameContainer">
+				<div id="gameTitle" >
+					<img class="bottom" src="projectImg/WHACK-A-MOLE.png">
+					<img class="top" src="projectImg/WHACK-A-MOLE pink.png">
+					<h1></h1>
+				</div>
+				
+				<div class="row"> 
+					<div class="col-md-9 displayCon">
+						<div class="displayContainer">
+							
+							<button type="button" class="start">Player 1 ready - Begin</button>
+							<!-- <button type="button" class="start2">Player 2 ready - Begin</button> -->
+							<table class="rounded-circle">
+								<thead>
+									<tr>
+										<td data-num="0"></td>
+									    <td data-num="1"></td>
+									    <td data-num="2"></td>
+									    <td data-num="3"></td>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+									    <td data-num="4"></td>
+									    <td data-num="5"></td>
+									    <td data-num="6"></td>
+									    <td data-num="7"></td>
+									</tr>
+								</tbody>
+								<tfoot>
+									<tr>
+									    <td data-num="8"></td>
+									    <td data-num="9"></td>
+									    <td data-num="10"></td>
+									    <td data-num="11"></td>
+									</tr>
+								</tfoot>
+							</table>
+						</div>
+					</div>
+				
+					<div class="col-md-3 score">
+						<div class="scoreContainer">
+							<img src="projectImg/Scoreboard.png">
+							<h4 class="player1"> Player 1: </h4>
+							<h4 class="player2"> Player 2: </h4>
+						</div>
+						<div class="timer">
+							<h3 class="timer">Timer</h3>
+						</div>
+					</div>
+				</div>
+			
 			</div>
-			<div class="scoreContainer">
-				<h3>Scoreboard</h3>
-				<h4 class="player1"> Player 1: </h4>
-				<h4 class="player2"> Player 2: </h4>
-			</div>
-			<div class="timer">
-				<h3 class="timer">Timer</h3>
-			</div>
-	</div>
-</body>
+		</div>
+	</body>
 </html>

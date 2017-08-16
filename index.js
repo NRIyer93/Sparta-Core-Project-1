@@ -2,165 +2,177 @@
 // WHACK-A-MOLE JAVASCRIPT //
 ////////////////////////////
 
-/////////////////
-//	  Begin    //
-/////////////////
 $(function(event){
+	////////////////////////////
+	//		Variables		 				//
+	///////////////////////////
 
-//-----------------------------------------------------------------------//
+	// Variable to find the display boxes
+	var $holes = $("td");
+	// Counter to increment score for player 1 and 2
+	var scoreCount = 0;
+	var scoreCount2 = 0;
+	// Counter to switch turns
+	var turnCount = 0;
+	// Variable to show scoreboard to include player 1 and player 2 scores
+	var scoreBoard = [[null],[null]];
+	// Var to set mole intervals
+	var moleInterval;
+	// Variable for timer
+	var time = 30;
+	// Variable for timer interval
+	var interval;
+	// Variable for mole interval
+	var showInterval;
+	var timeoutInt;
+	var splatAudio = new Audio('miscFiles/splat.mp3');
 
-////////////////////////////
-//		Variables		 				//
-///////////////////////////
+	/////////////////////////
+	//	   FUNCTIONS	  //
+	////////////////////////
+	// First, we need to create a function that changes the colour of the
+	// background. Call it in a random generator and then change back when 
+	// clicked.
 
-// Variable to find the display boxes
-var $holes = $("td");
-// Variable to keep track of Player 1 score
-var player1score = 0;
-// Variable to keep track of Player 2 score
-var player2score = 0;
-// Variable with score to beat
-var highScore = [];
-// Counter to increment score
-var scoreCount = 0;
-// Counter to switch turns
-var turnCount = 0;
-// Variable to show scoreboard to include player 1 and player 2 scores
-var scoreBoard = [[null],[null]];
-// Var to set mole intervals
-var moleInterval;
-// Variable for timer
-var time = 20;
-// Variable for timer interval
-var interval;
-//------------------------------------------------------------------------// 
+	// Function to show the mole in random boxes and after a certain time, hide them.
+	function showMole(){
+		var randSquare = Math.floor(Math.random() * 11);
 
-/////////////////////////
-//	   FUNCTIONS	  //
-////////////////////////
-
-// First, we need to create a function that changes the colour of the
-// background. Call it in a random generator and then change back when 
-// clicked.
-
-// Function to change box colour on click
-function changeCol(){
-	// where 'i' is the active square.
-	var randSquare = Math.floor(Math.random() * 11);
-		for (i = 0; i < $holes.length; i++){
+		for(i = 0; i < $holes.length - 1; i++){
 			
-			if(time > 0){
+			if (time > 0){
+				
 				if(i === randSquare){
-					$($holes[i]).css('background-color', 'red');
+					var index = i;
+
+					$($holes[i]).css('background-color','blue');
+					setTimeout(function(){
+						console.log('Index', i, 'here');
+						$($holes[index]).css('background-color','black');
+						$($holes[i]).off('click');
+						}, timeoutInt);
 					
 					$($holes[i]).click(function() {
+						splatAudio.play();
 						$(this).css('background-color', 'black');
-						console.log('this works');
-						scoreCount++;
-						console.log(scoreCount);
 						if(turnCount === 0){
+							scoreCount++;
 							$(".player1").html("Player 1: " + scoreCount);
-						}else {
-							$(".player1").html("Player 1: " + scoreCount);
+						}else{
+							scoreCount2++;
+							$(".player2").html("Player 2: " + scoreCount2);
 						}
-						// prevents user from clicking on same panel to score again
 						$(this).off('click');
-					})
+					});
+
 				}
+
 			}
+
+		}
+
+	}
+
+	// Function to hide mole
+	function hideMole(){
+
+		$($holes[i]).css('background-color','black');
+
+	}
+
+	//  Function that runs the intervals at which the mole appears
+	function moleTimer() {
+
+		if(scoreCount <= 3 || scoreCount2 <= 3){
+			timeoutInt = 1000;
+			showInterval = setInterval(showMole, 2000);
+		} else if ((scoreCount >= 6 || scoreCount2 >= 6) && (scoreCount <= 10 || scoreCount2 <= 10)){
+			timeoutInt = 500;
+			showInterval = setInterval(showMole, 1000);
+		}	else if ((scoreCount > 10|| scoreCount2 > 10) && (scoreCount <= 20 || scoreCount2 <= 20)) {
+			timeoutInt = 200;
+			showInterval = setInterval(showMole, 500);
 		} 
-}
-//-------------------------------------------------//
 
-// Function to show time
-function countDown(){
-	time--;
-	$('.timer').html("Time left: " + time + 's');
-	if(time === 0){
-		$('.timer').html("GAME OVER");
-		window.clearInterval(interval);
-		turnCount++;
-		console.log("player switch")
 	}
-}
-
-function startTimer(){
-	interval = setInterval(countDown, 1000);
-}
-
-//-------------------------------------------------//
-
-// Function to switch players
-function playerSwitch(){
-
-	// if timer is zero, increment turn count and 
-	// play again.
-	turnCount++;
-	changeCol();
-}
-//-------------------------------------------------//
-
-// Function to compare player 1 and player 2 score
-function scoreCompare(){
-	if (player1score > player2score){
-		console.log("Player 1 has won!!");
-	}else if (player1score < player2score){
-		console.log("Player 2 has won!!");
-	}else {
-		console.log("Draw!!!!")
-	}
-}
-
-//--------------------------------------------------//
-function intervalChange(){
-	if(scoreCount <= 3){
-		moleInterval = setInterval(changeCol, 1000);
-	}
-	if (scoreCount >= 4 && scoreCount <= 10){
-		moleInterval = setInterval(changeCol, 250);
-	}
-	if(scoreCount >= 11 && scoreCount <= 14 ){
-		moleInterval = setInterval(changeCol, 100);
-	}
-	if(scoreCount >= 14 && scoreCount <= 20 ){
-		moleInterval = setInterval(changeCol, 50);
-	}
-	if(scoreCount > 20){
-		moleInterval = setInterval(changeCol, 25);
-	}
-}
-
-//--------------------------------------------------//
-
-// Function to run game
-function runGame(){
 	
-	startTimer();
-	intervalChange();
-	changeCol();
-	//playerSwitch(); ///
-	//endGame();	 		 /////////// Lines 141 to 143 to be used later
-	//scoreCompare(); ///
-}
+	// Timing functions
+	function countDown(){
+		time--;
+		$('.timer').html("Time left: " + time + 's');
+		
+		if (time === 0) {
+			$('.timer').html("GAME OVER");
+			window.clearInterval(interval);
+			window.clearInterval(showInterval);
+			$($holes).off();
+			hideMole();
+			turnCount++;
+			time = 30;
+		  
+		  if (turnCount === 1) {
+		  	$(".start").show();
+			  $(".start").html("Player 2 ready - Begin");
+			} else if (turnCount ===2) {
+				scoreCompare(scoreCount, scoreCount2);
+			}
 
-//-------------------------------------------------//
+		}
 
-// Function to end game
-function endGame(){
-	if (turnCount === 2) {
-		console.log("end of game");
 	}
 
-}
-//--------------------------------------------------//
-runGame();
+	// Sets the countdown interval to 1 second
+	function startTimer(){
+		
+		interval = setInterval(countDown, 1000);
 
-})
+	}
 
+	// Function to compare player 1 and player 2 score
+	function scoreCompare(scoreCount,scoreCount2){
 
+		if (turnCount === 2){
+			
+			if (scoreCount > scoreCount2){
+				$(".jumbotron").html("PLAYER 1 WINS");
+			} else if (scoreCount < scoreCount2){
+				$(".jumbotron").html("PLAYER 2 WINS");
+			} else {
+				$(".jumbotron").html("DRAW!!")
+			}
 
+		}
 
+	}
 
+	// Function to run first game
+	function runGame1(){
+		
+		startTimer();
+		moleTimer();
+		showMole();
 
+	}
+	
+	// Function to end game
+	function endGame(){
+		
+		if (turnCount === 2) {
+			console.log("end of game");
+		}
 
+	}
 
+	// Function to start the game
+	function start(){
+
+		$('.start').on('click', function(){
+			$(this).hide();
+			runGame1();
+		});
+
+	}
+	
+	start();
+
+});

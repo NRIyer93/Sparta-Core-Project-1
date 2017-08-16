@@ -1,11 +1,22 @@
+* {
+	background-size: cover;
+}
+
 body {
 	background-color: lightblue;
-	color: red;
+	color: white;
 	text-align: center;
+	margin: 0;
+	padding: 0;
+	background-size: cover;
 }
 
 h1 {
+	text-shadow: 2px 2px grey;
+}
 
+head {
+	text-align: center;
 	color: black;
 }
 
@@ -20,7 +31,7 @@ td {
   text-align: center;
   font-size: 8em;
   box-sizing:border-box;
-  background-color: black;
+  background-color: black; 
 }
 
 td:hover{
@@ -49,13 +60,116 @@ tfoot tr td{
   border-bottom: none;
 }
 
+	/*cursor: url("projectImg/baseball-bat.png");*/
+#mouse-pointer {
+	cursor: url("projectImg/baseball-bat.png");
+
+}
+
+.backG {
+
+	background-image: url("projectImg/retroBackground.jpg");
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+
 .gameContainer {
 	border-color: black;
 	text-align: center;
+	border-height: 100vh;
+	border-width: 100vw;
+	align-content: center;
+	
+	 
+}
+
+.displayContainer {
+	padding: auto;
+	
+	text-align: center;
+	border-height: 100vh;
+	border-width: 100vw;	
+	position: absolute;
+	margin-left: 500px;
+	margin-bottom: 200px;
 }
 
 .scoreContainer {
 	text-align: center;
+	border: 2px solid black;
+	background-color: grey;
 }
 
+.scoreContainer img {
+	
+}
+
+.board img {
+	align-content: center;
+	background-size: auto;
+}
+/*.jumbotron {
+	text-align: center;
+	background-image: url('projectImg/WHACK-A-MOLE.png');
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 1000px;
+}*/
+
+.row {
+
+	background-size: cover;
+	height: 50vh;
+}
+
+#gameTitle {
+  position:relative;
+  height: 50vh;
+  width: 50vw;
+  margin:0 auto;
+
+}
+
+#gameTitle img {
+  position:absolute;
+  left:0;
+  -webkit-transition: opacity 1s ease-in-out;
+  -moz-transition: opacity 1s ease-in-out;
+  -o-transition: opacity 1s ease-in-out;
+  transition: opacity 1s ease-in-out;
+}
+
+@keyframes titleFade {
+  0% {
+  opacity:1;
+}
+45% {
+opacity:1;
+}
+55% {
+opacity:0;
+}
+100% {
+opacity:0;
+}
+}
+
+#gameTitle img.top {
+background-size: cover;
+display: inline-block;
+animation-name: titleFade;
+animation-timing-function: ease-in-out;
+animation-iteration-count: infinite;
+animation-duration: 2s;
+animation-direction: alternate;
+}
+/*@keyframes animate {
+	from{
+		background-position: 0 0;
+	}
+	to {
+		background-position: 100% 0;
+	}
+}*/
 
