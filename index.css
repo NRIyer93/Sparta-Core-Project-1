@@ -35,7 +35,7 @@ td {
 }
 
 td:hover{
-  cursor:pointer;
+  cursor: pointer;
 }
 
 td:first-child{
@@ -86,7 +86,6 @@ tfoot tr td{
 
 .displayContainer {
 	padding: auto;
-	
 	text-align: center;
 	border-height: 100vh;
 	border-width: 100vw;	
@@ -96,19 +95,43 @@ tfoot tr td{
 }
 
 .scoreContainer {
+	position: absolute;
 	text-align: center;
-	border: 2px solid black;
+	background-color: grey;
+	margin-right: 400px;
+	margin-top: 200px;
+	width: 100%;
+}
+
+.scoreContainer h4 {
+	color: black;
+}
+
+.innerScore img {
+	position:absolute;
+	margin-top: 150px;
+	margin-left: 170px;
+	width: 50%;
+}
+
+.timer {
+	position: absolute;
+	margin-top: 100px;
+	color: black;
+	font-size: 4px solid black;
 	background-color: grey;
 }
 
-.scoreContainer img {
-	
+.timer h3 {
+
+	color: black;
 }
 
-.board img {
+/*.board img {
 	align-content: center;
 	background-size: auto;
-}
+	width: 100%;
+}*/
 /*.jumbotron {
 	text-align: center;
 	background-image: url('projectImg/WHACK-A-MOLE.png');

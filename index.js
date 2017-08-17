@@ -52,6 +52,7 @@ $(function(event){
 						$($holes[i]).off('click');
 						}, timeoutInt);
 					
+					
 					$($holes[i]).click(function() {
 						splatAudio.play();
 						$(this).css('background-color', 'black');
@@ -62,6 +63,7 @@ $(function(event){
 							scoreCount2++;
 							$(".player2").html("Player 2: " + scoreCount2);
 						}
+						
 						$(this).off('click');
 					});
 
@@ -81,15 +83,16 @@ $(function(event){
 	}
 
 	//  Function that runs the intervals at which the mole appears
-	function moleTimer() {
+	function moleTimer(scoreCount, scoreCount2) {
 
-		if(scoreCount <= 3 || scoreCount2 <= 3){
+		if(scoreCount < 3 || scoreCount2 < 3){
 			timeoutInt = 1000;
 			showInterval = setInterval(showMole, 2000);
-		} else if ((scoreCount >= 6 || scoreCount2 >= 6) && (scoreCount <= 10 || scoreCount2 <= 10)){
+		} else if ((scoreCount >= 5 && scoreCount <= 11) || (scoreCount2 >= 8 && scoreCount2 <= 10)){
 			timeoutInt = 500;
+			console.log("speed up");
 			showInterval = setInterval(showMole, 1000);
-		}	else if ((scoreCount > 10|| scoreCount2 > 10) && (scoreCount <= 20 || scoreCount2 <= 20)) {
+		}	else if ((scoreCount === 12) || (scoreCount2 === 12)) {
 			timeoutInt = 200;
 			showInterval = setInterval(showMole, 500);
 		} 
@@ -134,11 +137,11 @@ $(function(event){
 		if (turnCount === 2){
 			
 			if (scoreCount > scoreCount2){
-				$(".jumbotron").html("PLAYER 1 WINS");
+				$(".scoreContainer").html("PLAYER 1 WINS");
 			} else if (scoreCount < scoreCount2){
-				$(".jumbotron").html("PLAYER 2 WINS");
+				$(".scoreContainer").html("PLAYER 2 WINS");
 			} else {
-				$(".jumbotron").html("DRAW!!")
+				$(".scoreContainer").html("DRAW!!")
 			}
 
 		}
@@ -149,7 +152,7 @@ $(function(event){
 	function runGame1(){
 		
 		startTimer();
-		moleTimer();
+		moleTimer(scoreCount, scoreCount2);
 		showMole();
 
 	}
