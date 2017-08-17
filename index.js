@@ -47,7 +47,6 @@ $(function(event){
 					// After a designated time, tiles disappear
 					$($holes[i]).css('background-color','blue');
 					setTimeout(function(){
-						console.log('Index', i, 'here');
 						$($holes[index]).css('background-color','black');
 						$($holes[i]).off('click');
 						}, timeoutInt);
@@ -84,10 +83,8 @@ $(function(event){
 			if(scoreCount < 3 || scoreCount2 < 3){
 				timeoutInt = 500;
 				showInterval = setInterval(showMole, 1000);
-				console.log('interval set');
 			} else if ((scoreCount >= 5 && scoreCount <= 11) || (scoreCount2 >= 5 && scoreCount2 <= 11)){
 				timeoutInt = 250;
-				console.log("speed up");
 				showInterval = setInterval(showMole, 500);
 			}	else if ((scoreCount >= 12 && scoreCount <= 20) || (scoreCount2 >= 12 && scoreCount2 <= 20)) {
 				timeoutInt = 200;
