@@ -9,64 +9,68 @@
 	<script src="index.js"></script>
 	
 </head>
-	<h1>WHACK A MOLE</h1>
+	
 <body>
-	<figure id="mouse-pointer"></figure>
 	<div class="backG">
+		<div class="instruct">
+			<h3> WELCOME TO WHACK-A-MOLE!</h3>
+			<p> It's fairly straightforward, just click on the tiles when they appear
+					in the grid to score points. Be quick otherwise they will disappear!
+					When you're ready to start the game, just click on the prompt above the grid!
+			</p>
+			<button type="button" class="confirm"> OK </button>
+		</div>
 			<div class="gameContainer">
 				<div id="gameTitle" >
 					<img class="bottom" src="projectImg/WHACK-A-MOLE.png">
 					<img class="top" src="projectImg/WHACK-A-MOLE pink.png">
-					<h1></h1>
+					
+						<div class="innerScore">
+								<img src="projectImg/Scoreboard.png">
+							</div>
+						<div class="scoreContainer">
+								<h4 class="player1"> Player 1: </h4>
+								<h4 class="player2"> Player 2: </h4>
+						
+							<div class="timer">
+								<h3 class="timertxt">Timer</h3>
+							</div>
+						</div>
 				</div>
 				
 				<div class="row"> 
 					<div class="col-md-9 displayCon">
 						<div class="displayContainer">
-							
 							<button type="button" class="start">Player 1 ready - Begin</button>
-							<!-- <button type="button" class="start2">Player 2 ready - Begin</button> -->
-							<table class="rounded-circle">
-								<thead>
-									<tr>
-										<td data-num="0"></td>
-									    <td data-num="1"></td>
-									    <td data-num="2"></td>
-									    <td data-num="3"></td>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-									    <td data-num="4"></td>
-									    <td data-num="5"></td>
-									    <td data-num="6"></td>
-									    <td data-num="7"></td>
-									</tr>
-								</tbody>
-								<tfoot>
-									<tr>
-									    <td data-num="8"></td>
-									    <td data-num="9"></td>
-									    <td data-num="10"></td>
-									    <td data-num="11"></td>
-									</tr>
-								</tfoot>
-							</table>
-						</div>
-					</div>
-				
-					<div class="col-md-3 score">
-						<div class="scoreContainer">
-							<img src="projectImg/Scoreboard.png">
-							<h4 class="player1"> Player 1: </h4>
-							<h4 class="player2"> Player 2: </h4>
-						</div>
-						<div class="timer">
-							<h3 class="timer">Timer</h3>
+								<table class="rounded-circle">
+									<thead>
+										<tr>
+												<td data-num="0"></td>
+										    <td data-num="1"></td>
+										    <td data-num="2"></td>
+										    <td data-num="3"></td>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+										    <td data-num="4"></td>
+										    <td data-num="5"></td>
+										    <td data-num="6"></td>
+										    <td data-num="7"></td>
+										</tr>
+									</tbody>
+									<tfoot>
+										<tr>
+										    <td data-num="8"></td>
+										    <td data-num="9"></td>
+										    <td data-num="10"></td>
+										    <td data-num="11"></td>
+										</tr>
+									</tfoot>
+								</table>
 						</div>
 					</div>
 				</div>
-			
 			</div>
 		</div>
 	</body>
