@@ -14,8 +14,6 @@ $(function(event){
 	var scoreCount2 = 0;
 	// Counter to switch turns
 	var turnCount = 0;
-	// Variable to show scoreboard to include player 1 and player 2 scores
-	var scoreBoard = [[null],[null]];
 	// Var to set mole intervals
 	var moleInterval;
 	// Variable for timer
@@ -48,13 +46,14 @@ $(function(event){
 					$($holes[i]).css('background-color','blue');
 					setTimeout(function(){
 						$($holes[index]).css('background-color','black');
-						$($holes[i]).off('click');
+						// $($holes[index]).off();
 						}, timeoutInt);
-					
+					//$($holes[i]).off();
 					// If player clicks the right tile, increment point counter 
 					$($holes[i]).click(function() {
 						splatAudio.play();
-						$(this).css('background-color', 'black');
+						//$(this).css('background-color', 'black');
+						$(this).off('click');
 						if(turnCount === 0){
 							scoreCount++;
 							$(".player1").html("Player 1: " + scoreCount);
@@ -83,13 +82,7 @@ $(function(event){
 			if(scoreCount < 3 || scoreCount2 < 3){
 				timeoutInt = 500;
 				showInterval = setInterval(showMole, 1000);
-			} else if ((scoreCount >= 5 && scoreCount <= 11) || (scoreCount2 >= 5 && scoreCount2 <= 11)){
-				timeoutInt = 250;
-				showInterval = setInterval(showMole, 500);
-			}	else if ((scoreCount >= 12 && scoreCount <= 20) || (scoreCount2 >= 12 && scoreCount2 <= 20)) {
-				timeoutInt = 200;
-				showInterval = setInterval(showMole, 500);
-			} 
+			}
 		}
 	}
 	
